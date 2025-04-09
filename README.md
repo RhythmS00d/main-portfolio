@@ -2,7 +2,7 @@
 
 Welcome to my developer portfolio — a sleek, modern, and responsive web app built with **Next.js**, **Tailwind CSS**, and **shadcn/ui**. This is my digital home to showcase who I am, what I’ve built, and where I’m going next.
 
-Live Demo: [https://your-portfolio-url.vercel.app](https://your-portfolio-url.vercel.app)
+Live Demo: [https://main-portfolio-phi-silk.vercel.app/](https://main-portfolio-phi-silk.vercel.app/)
 
 ---
 
