@@ -1,10 +1,100 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin } from "lucide-react"
+"use client";
+
+import { Card, CardContent } from "@/components/ui/card";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
+import ContactLoading from "./contact-loading";
 
 export default function ContactSection() {
+  const [submit, isSubmitted] = useState(false);
+
+  function handleSubmit(e: React.FormEvent<HTMLElement>) {
+    e.preventDefault()
+    isSubmitted(true);
+
+    const timeout = setTimeout(() => {
+      isSubmitted(false);
+    }, 3500)
+
+    return () => clearTimeout(timeout);
+  }
+
+  const ContactForm = () => (
+    <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+        <div className="space-y-2">
+          <label
+            htmlFor="name"
+            className="text-xs md:text-sm font-medium text-primary"
+          >
+            Name
+          </label>
+          <Input
+            id="name"
+            placeholder="Your name"
+            required
+            className="text-sm border-primary/20 focus:border-primary focus:ring-primary cursor-text"
+          />
+        </div>
+        <div className="space-y-2">
+          <label
+            htmlFor="email"
+            className="text-xs md:text-sm font-medium text-primary"
+          >
+            Email
+          </label>
+          <Input
+            id="email"
+            type="email"
+            placeholder="Your email"
+            required
+            className="text-sm border-primary/20 focus:border-primary focus:ring-primary cursor-text"
+          />
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <label
+          htmlFor="subject"
+          className="text-xs md:text-sm font-medium text-primary"
+        >
+          Subject
+        </label>
+        <Input
+          id="subject"
+          placeholder="Subject of your message"
+          required
+          className="text-sm border-primary/20 focus:border-primary focus:ring-primary cursor-text"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <label
+          htmlFor="message"
+          className="text-xs md:text-sm font-medium text-primary"
+        >
+          Message
+        </label>
+        <Textarea
+          id="message"
+          placeholder="Your message"
+          rows={6}
+          required
+          className="text-sm resize-y min-h-[100px] border-primary/20 focus:border-primary focus:ring-primary cursor-text"
+        />
+      </div>
+
+      <Button
+        type="submit"
+        className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 cursor-pointer"
+      >
+        Send Message
+      </Button>
+    </form>
+  );
   return (
     <section id="contact" className="py-16 md:py-20 bg-primary-light/30 w-full">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
@@ -26,8 +116,12 @@ export default function ContactSection() {
                   <Mail className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-sm md:text-base text-primary">Email</h3>
-                  <p className="text-muted-foreground text-xs md:text-sm break-all">rhythmsood1@gmail.com</p>
+                  <h3 className="font-medium text-sm md:text-base text-primary">
+                    Email
+                  </h3>
+                  <p className="text-muted-foreground text-xs md:text-sm break-all">
+                    rhythmsood1@gmail.com
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -41,8 +135,12 @@ export default function ContactSection() {
                   <Phone className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-sm md:text-base text-primary">Phone</h3>
-                  <p className="text-muted-foreground text-xs md:text-sm">+61 450 294 324</p>
+                  <h3 className="font-medium text-sm md:text-base text-primary">
+                    Phone
+                  </h3>
+                  <p className="text-muted-foreground text-xs md:text-sm">
+                    +61 450 294 324
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -56,80 +154,29 @@ export default function ContactSection() {
                   <MapPin className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-sm md:text-base text-primary">Location</h3>
-                  <p className="text-muted-foreground text-xs md:text-sm">Sydney, Australia</p>
+                  <h3 className="font-medium text-sm md:text-base text-primary">
+                    Location
+                  </h3>
+                  <p className="text-muted-foreground text-xs md:text-sm">
+                    Sydney, Australia
+                  </p>
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          <div className="lg:col-span-2 animate-slide-up" style={{ animationDelay: "0.3s" }}>
+          <div
+            className="lg:col-span-2 animate-slide-up"
+            style={{ animationDelay: "0.3s" }}
+          >
             <Card className="border-none shadow-lg blue-glow">
               <CardContent className="p-4 sm:p-6 bg-gradient-to-br from-white to-primary-light/10 rounded-lg">
-                <form className="space-y-4 md:space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-xs md:text-sm font-medium text-primary">
-                        Name
-                      </label>
-                      <Input
-                        id="name"
-                        placeholder="Your name"
-                        required
-                        className="text-sm border-primary/20 focus:border-primary focus:ring-primary cursor-text"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-xs md:text-sm font-medium text-primary">
-                        Email
-                      </label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="Your email"
-                        required
-                        className="text-sm border-primary/20 focus:border-primary focus:ring-primary cursor-text"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-xs md:text-sm font-medium text-primary">
-                      Subject
-                    </label>
-                    <Input
-                      id="subject"
-                      placeholder="Subject of your message"
-                      required
-                      className="text-sm border-primary/20 focus:border-primary focus:ring-primary cursor-text"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-xs md:text-sm font-medium text-primary">
-                      Message
-                    </label>
-                    <Textarea
-                      id="message"
-                      placeholder="Your message"
-                      rows={6}
-                      required
-                      className="text-sm resize-y min-h-[100px] border-primary/20 focus:border-primary focus:ring-primary cursor-text"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 cursor-pointer"
-                  >
-                    Send Message
-                  </Button>
-                </form>
+                {submit ? <ContactLoading /> : <ContactForm />}
               </CardContent>
             </Card>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
